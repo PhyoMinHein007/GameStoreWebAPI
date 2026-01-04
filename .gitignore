@@ -14,3 +14,7 @@ obj/
 .vs/
 *.user
 *.suo
+
+# SQLite temp files
+*.db-shm
+*.db-wal
