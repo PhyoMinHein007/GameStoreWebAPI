@@ -1,7 +1,36 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Game Catalog</PageTitle>
 
-<h1>Hello, World!</h1>
+<table class="table table-bordered table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>Name</th>
+      <th>Genre</th>
+      <th>Price</th>
+      <th>Release Date</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var game in games)
+    {
+      <tr>
+        <td>@game.Name</td>
+        <td>@game.Genre</td>
+        <td>@game.Price.ToString("C2")</td>
+        <td>@game.ReleaseDate.ToString("MMMM dd, yyyy")</td>
+        <td></td>
+      </tr>
+    }
+  </tbody>
+</table>
 
-Welcome to your new app.
+@code{
+  private GameSummary[] games = new GameSummary[]
+  {
+    new GameSummary { Id = 1, Name = "Adventure Quest", Genre = "Adventure", Price = 29.99m, ReleaseDate = new DateOnly(2022, 5, 15) },
+    new GameSummary { Id = 2, Name = "Racing Pro", Genre = "Racing", Price = 49.99m, ReleaseDate = new DateOnly(2021, 11, 20) },
+    new GameSummary { Id = 3, Name = "Puzzle Master", Genre = "Puzzle", Price = 19.99m, ReleaseDate = new DateOnly(2023, 2, 10) }
+  };
+}
