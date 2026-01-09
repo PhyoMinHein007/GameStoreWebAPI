@@ -1,8 +1,11 @@
 ﻿@page "/"
+@using GameStore.Frontend.Clients
 
 <PageTitle>Game Catalog</PageTitle>
 
-<table class="table table-bordered table-hover">
+@if(games is not null)
+{
+  <table class="table table-bordered table-hover">
   <thead class="table-dark">
     <tr>
       <th>Name</th>
@@ -25,12 +28,19 @@
     }
   </tbody>
 </table>
+}
+else
+{
+  <p><em>Loading...</em></p>
+}
 
 @code{
-  private GameSummary[] games = new GameSummary[]
-  {
-    new GameSummary { Id = 1, Name = "Adventure Quest", Genre = "Adventure", Price = 29.99m, ReleaseDate = new DateOnly(2022, 5, 15) },
-    new GameSummary { Id = 2, Name = "Racing Pro", Genre = "Racing", Price = 49.99m, ReleaseDate = new DateOnly(2021, 11, 20) },
-    new GameSummary { Id = 3, Name = "Puzzle Master", Genre = "Puzzle", Price = 19.99m, ReleaseDate = new DateOnly(2023, 2, 10) }
-  };
+
+    private GamesClient gamesClient = new GamesClient();
+    private GameSummary[]? games;
+
+    protected override void OnInitialized()
+    {
+        games = gamesClient.GetAllGames();
+    }
 }
