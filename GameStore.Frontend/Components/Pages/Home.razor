@@ -1,7 +1,9 @@
 ﻿@page "/"
 @using GameStore.Frontend.Clients
+@inject GamesClient gamesClient
 
 <PageTitle>Game Catalog</PageTitle>
+<a href="/editgame" class="btn btn-primary mb-3">Add New Game</a>
 
 @if(games is not null)
 {
@@ -35,12 +37,12 @@ else
 }
 
 @code{
-
-    private GamesClient gamesClient = new GamesClient();
     private GameSummary[]? games;
 
     protected override void OnInitialized()
     {
         games = gamesClient.GetAllGames();
     }
+
+    
 }

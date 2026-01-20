@@ -30,4 +30,21 @@ public class GamesClient
 
     games.Add(gameSummary);   
   }
+
+  public GameDetails GetGameDetails(int id)
+    {
+        GameSummary? gameSummary = games?.FirstOrDefault(g => g.Id == id);
+        ArgumentNullException.ThrowIfNull(gameSummary);
+
+        var genre = genres.FirstOrDefault(d => string.Equals(d.Name, gameSummary.Genre, StringComparison.OrdinalIgnoreCase));
+
+        return new GameDetails
+        {
+            Id = gameSummary.Id,
+            Name = gameSummary.Name,
+            GenreId = genre?.Id.ToString(),
+            Price = gameSummary.Price,
+            ReleaseDate = gameSummary.ReleaseDate
+        };
+    }
 }
