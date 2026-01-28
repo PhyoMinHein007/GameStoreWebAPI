@@ -25,7 +25,20 @@
         <td>@game.Genre</td>
         <td>@game.Price.ToString("C2")</td>
         <td>@game.ReleaseDate.ToString("MMMM dd, yyyy")</td>
-        <td></td>
+        <td>
+          <div class="d-flex">
+            <a class="btn btn-primary me-2" role="button" href="@GameUrl(game.Id)" title="Edit @game.Name">
+              <i class="bi bi-pencil"></i>
+            </a>
+            <button class="btn btn-danger"
+                    data-bs-toggle="modal"
+                    data-bs-target="@GetDeleteModalId(game)"
+                    title="Delete @game.Name">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+          <DeleteGame Game="game" />
+        </td>
       </tr>
     }
   </tbody>
@@ -44,5 +57,8 @@ else
         games = gamesClient.GetAllGames();
     }
 
-    
+    private string GameUrl(int Id) => $"/editgame/{Id}";
+
+    private string GetDeleteModalId(GameSummary game) => "#" + DeleteGame.GetModalId(game);
+
 }
