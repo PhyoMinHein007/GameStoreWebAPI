@@ -3,7 +3,7 @@ using GameStore.Frontend.Models;
 
 namespace GameStore.Frontend.Clients;
 
-public class GamesClient
+public class GamesClient(HttpClient httpClient)
 {
   private readonly List<GameSummary> games = new ()
   {
@@ -12,7 +12,7 @@ public class GamesClient
     new GameSummary { Id = 3, Name = "Puzzle Master", Genre = "Puzzle", Price = 19.99m, ReleaseDate = new DateOnly(2023, 2, 10) }
   };
 
-  private readonly Genre[] genres = new GenresClient().GetAllGenres();
+  private readonly Genre[] genres = new GenresClient(httpClient).GetAllGenres();
 
   public GameSummary[] GetAllGames() => [..games];
 
