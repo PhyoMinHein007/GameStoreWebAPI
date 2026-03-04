@@ -52,9 +52,9 @@ else
 @code{
     private GameSummary[]? games;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        games = gamesClient.GetAllGames();
+        games = await gamesClient.GetAllGamesAsync();
     }
 
     private string GameUrl(int Id) => $"/editgame/{Id}";

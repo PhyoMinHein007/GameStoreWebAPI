@@ -27,14 +27,14 @@
         title = $"Delete {Game?.Name}?";
     }
 
-  public static string GetModalId(GameSummary? game) {
-    ArgumentNullException.ThrowIfNull(game);
-    return $"deleteGameModal_{game.Id}";
-  }
+    public static string GetModalId(GameSummary? game) {
+        ArgumentNullException.ThrowIfNull(game);
+        return $"deleteGameModal_{game.Id}";
+    }
 
-  private void ConfirmDelete()
-  {
-    gamesClient.DeleteGame(Game!.Id);
-    navigationManager.Refresh();
+    private async Task ConfirmDelete()
+    {
+        await gamesClient.DeleteGameAsync(Game!.Id);
+        navigationManager.Refresh();
   }
 }
